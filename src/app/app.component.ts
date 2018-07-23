@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataStoreService} from './store/data-store.service';
+import {BroadcastService} from './service/broadcast.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import {DataStoreService} from './store/data-store.service';
 export class AppComponent implements OnInit {
   data = [];
 
-  constructor(public dataStore: DataStoreService) {
+  constructor(public dataStore: DataStoreService,
+              private broadcastService: BroadcastService) {
   }
 
   ngOnInit() {
@@ -30,14 +32,20 @@ export class AppComponent implements OnInit {
   }
 
   selectToTarget() {
+    const idBox = [];
     this.dataStore.setTargetData(this.dataStore.getCheckData);
-    this.dataStore.getTargetData.forEach(item => {
-      this.dataStore.getAllData.forEach((val, index) => {
-        if (val['id'] === item['id']) {
-          this.dataStore.getAllData.splice(index, 1);
+    this.dataStore.getCheckData.forEach(item => {
+      idBox.push(item['id']);
+    });
+    idBox.forEach(i => {
+      this.dataStore.getAllData.forEach((item, index, arr) => {
+        if (item.id === i) {
+          arr.splice(index, 1);
         }
       });
     });
+    this.broadcastService.broadcastLastChecked(this.dataStore.getCheckData);
     this.dataStore.setCheckData([]);
+    this.broadcastService.broadcastSourceToTarget(true);
   }
 }

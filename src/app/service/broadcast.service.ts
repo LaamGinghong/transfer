@@ -6,11 +6,21 @@ import {Subject} from 'rxjs';
 })
 export class BroadcastService {
   sourceCheckAll$ = new Subject();
+  sourceToTarget$ = new Subject();
+  lastCheck$ = new Subject();
 
   constructor() {
   }
 
   broadcastSourceCheckAll(content) {
     this.sourceCheckAll$.next(content);
+  }
+
+  broadcastSourceToTarget(content) {
+    this.sourceToTarget$.next(content);
+  }
+
+  broadcastLastChecked(content) {
+    this.lastCheck$.next(content);
   }
 }
