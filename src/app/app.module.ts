@@ -5,12 +5,14 @@ import {AppComponent} from './app.component';
 import {MobxAngularModule} from 'mobx-angular';
 import {SourceComponent} from './source/source.component';
 import {SourceInnerComponent} from './source/source-inner/source-inner.component';
+import { TargetComponent } from './target/target.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SourceComponent,
-    SourceInnerComponent
+    SourceInnerComponent,
+    TargetComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import {autorun, computed, action, observable} from 'mobx';
 })
 export class DataStoreService {
   @observable allData = [];
+  @observable checkData = [];
 
   constructor() {
     if (localStorage.allData) {
@@ -22,5 +23,13 @@ export class DataStoreService {
 
   @action setAllData(val) {
     this.allData = val;
+  }
+
+  @computed get getCheckData() {
+    return this.checkData;
+  }
+
+  @action setCheckData(val) {
+    this.checkData = val;
   }
 }

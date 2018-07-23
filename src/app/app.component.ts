@@ -9,7 +9,7 @@ import {DataStoreService} from './store/data-store.service';
 export class AppComponent implements OnInit {
   data = [];
 
-  constructor(private dataStore: DataStoreService) {
+  constructor(public dataStore: DataStoreService) {
   }
 
   ngOnInit() {
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   }
 
   initData() {
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 10; i++) {
       const value = {
         id: i,
         content: `content${i}`,

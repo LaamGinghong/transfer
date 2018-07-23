@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataStoreService} from '../store/data-store.service';
+import {BroadcastService} from '../service/broadcast.service';
 
 @Component({
   selector: 'app-source',
@@ -11,7 +12,8 @@ export class SourceComponent implements OnInit {
   checkAllStatus = false;
   @ViewChild('checkbox') checkbox: ElementRef;
 
-  constructor(public dataStore: DataStoreService) {
+  constructor(public dataStore: DataStoreService,
+              private broadcastService: BroadcastService) {
   }
 
   ngOnInit() {
@@ -24,7 +26,9 @@ export class SourceComponent implements OnInit {
 
   checkAll() {
     this.checkAllStatus = this.checkbox.nativeElement.checked;
-    // this.checkAllStatus = !this.checkAllStatus;
+    this.broadcastService.broadcastSourceCheckAll(this.checkAllStatus);
     this.checkNum = this.checkAllStatus ? this.dataStore.getAllData.length : 0;
+    this.dataStore.setCheckData(this.checkAllStatus ? this.dataStore.getAllData : []);
   }
+
 }

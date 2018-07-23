@@ -2,6 +2,8 @@
   width: 200px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  display: inline-block;
+  vertical-align: middle;
 }
 #source header{
   border-bottom: 1px solid #cccccc;
