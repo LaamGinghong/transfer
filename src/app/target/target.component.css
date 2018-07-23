@@ -1,0 +1,27 @@
+#target {
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#target header {
+  border-bottom: 1px solid #cccccc;
+  padding: 8px 10px;
+}
+
+#target input {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+#target label, span {
+  vertical-align: middle;
+  margin: 0 4px;
+}
+
+#target span {
+  margin-left: 30px;
+}
