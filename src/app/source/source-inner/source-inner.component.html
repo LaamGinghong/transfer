@@ -1,0 +1,6 @@
+<div id="source-inner">
+  <div *ngFor="let item of dataStore.getAllData">
+    <input type="checkbox" [value]="item.id" [id]="item.id" (click)="check(item,checkbox)" #checkbox>
+    <label [for]="item.id">{{item.content}}</label>
+  </div>
+</div>

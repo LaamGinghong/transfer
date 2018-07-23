@@ -2,9 +2,11 @@
   width: 200px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+#source header{
+  border-bottom: 1px solid #cccccc;
   padding: 8px 10px;
 }
-
 #source input {
   width: 20px;
   height: 20px;
@@ -17,5 +19,5 @@
 }
 
 #source span{
-  margin-left: 50px;
+  margin-left: 30px;
 }

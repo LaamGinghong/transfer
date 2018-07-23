@@ -1,0 +1,21 @@
+#source-inner {
+  height: 200px;
+  overflow-y: auto;
+  padding: 8px 0 8px 10px;
+}
+
+#source-inner div {
+  margin: 10px 0;
+}
+
+#source-inner input {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+#source-inner label {
+  vertical-align: middle;
+  margin: 0 4px;
+}
+

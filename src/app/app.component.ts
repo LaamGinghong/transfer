@@ -21,7 +21,9 @@ export class AppComponent implements OnInit {
     for (let i = 1; i <= 20; i++) {
       const value = {
         id: i,
-        content: `content${i}`
+        content: `content${i}`,
+        sourceChecked: false,
+        targetChecked: false
       };
       this.data.push(value);
     }
