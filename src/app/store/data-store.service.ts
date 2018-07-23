@@ -8,6 +8,7 @@ import {retry} from 'rxjs/operators';
 export class DataStoreService {
   @observable allData = [];
   @observable checkData = [];
+  @observable cancelData = [];
   @observable targetData = [];
 
   constructor() {
@@ -33,6 +34,14 @@ export class DataStoreService {
 
   @action setCheckData(val) {
     this.checkData = val;
+  }
+
+  @computed get getCancelData() {
+    return this.cancelData;
+  }
+
+  @action setCancelData(val) {
+    this.cancelData = val;
   }
 
   @computed get getTargetData() {

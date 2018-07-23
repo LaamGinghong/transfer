@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataStoreService} from '../store/data-store.service';
 
 @Component({
@@ -8,6 +8,8 @@ import {DataStoreService} from '../store/data-store.service';
 })
 export class TargetComponent implements OnInit {
   checkNum = 0;
+  @ViewChild('checkbox') checkbox: ElementRef;
+
 
   constructor(public dataStore: DataStoreService) {
   }
@@ -15,4 +17,7 @@ export class TargetComponent implements OnInit {
   ngOnInit() {
   }
 
+  checkAll() {
+
+  }
 }

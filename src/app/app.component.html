@@ -1,7 +1,10 @@
 <div id="app" *mobxAutorun>
   <app-source></app-source>
   <div id="button">
-    <button><</button>
+    <button [className]="dataStore.getCancelData.length?'checkedButton':'defaultButton'"
+            (click)="selectToTarget()"
+            [disabled]="!dataStore.getCancelData.length"><
+    </button>
     <button [className]="dataStore.getCheckData.length?'checkedButton':'defaultButton'"
             (click)="selectToTarget()"
             [disabled]="!dataStore.getCheckData.length">>
