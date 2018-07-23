@@ -40,7 +40,6 @@ export class SourceInnerComponent implements OnInit {
         });
         this.checkData = [];
       }
-      console.log(this.checkData);
     });
   }
 

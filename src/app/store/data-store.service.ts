@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {autorun, computed, action, observable} from 'mobx';
+import {retry} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import {autorun, computed, action, observable} from 'mobx';
 export class DataStoreService {
   @observable allData = [];
   @observable checkData = [];
+  @observable targetData = [];
 
   constructor() {
     if (localStorage.allData) {
@@ -31,5 +33,13 @@ export class DataStoreService {
 
   @action setCheckData(val) {
     this.checkData = val;
+  }
+
+  @computed get getTargetData() {
+    return this.targetData;
+  }
+
+  @action setTargetData(val) {
+    this.targetData = val;
   }
 }

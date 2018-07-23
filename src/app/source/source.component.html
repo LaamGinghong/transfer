@@ -1,7 +1,7 @@
 <div id="source">
   <header>
-    <input type="checkbox" name="selected" value="length" id="length" (click)="checkAll()" #checkbox>
-    <label for="length">{{checkNum}}/{{dataStore.getAllData.length}}项</label>
+    <input type="checkbox" name="source" value="source" id="sourceCheckbox" (click)="checkAll()" #checkbox>
+    <label for="sourceCheckbox">{{checkNum}}/{{dataStore.getAllData.length}}项</label>
     <span>Source</span>
   </header>
   <app-source-inner (checkOutputNum)="changeCheckNum($event)"></app-source-inner>

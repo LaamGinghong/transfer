@@ -28,4 +28,16 @@ export class AppComponent implements OnInit {
       this.data.push(value);
     }
   }
+
+  selectToTarget() {
+    this.dataStore.setTargetData(this.dataStore.getCheckData);
+    this.dataStore.getTargetData.forEach(item => {
+      this.dataStore.getAllData.forEach((val, index) => {
+        if (val['id'] === item['id']) {
+          this.dataStore.getAllData.splice(index, 1);
+        }
+      });
+    });
+    this.dataStore.setCheckData([]);
+  }
 }
