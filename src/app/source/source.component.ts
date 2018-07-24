@@ -13,6 +13,7 @@ export class SourceComponent implements OnInit {
   lastChecked: any;
   @ViewChild('checkbox') checkbox: ElementRef;
 
+
   constructor(public dataStore: DataStoreService,
               private broadcastService: BroadcastService) {
   }
@@ -26,11 +27,17 @@ export class SourceComponent implements OnInit {
     this.broadcastService.lastCheck$.subscribe(data => {
       this.lastChecked = data;
     });
+    this.broadcastService.deleteCheckAll$.subscribe(data => {
+      this.checkAllStatus = !!data;
+      this.checkbox.nativeElement.checked = this.checkAllStatus;
+    });
   }
 
   changeCheckNum(num) {
     this.checkNum = num;
-    this.checkbox.nativeElement.checked = this.checkNum === this.dataStore.getAllData.length ? true : false;
+    if (num) {
+      this.checkbox.nativeElement.checked = this.checkNum === this.dataStore.getAllData.length ? true : false;
+    }
   }
 
   checkAll() {

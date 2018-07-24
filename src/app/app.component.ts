@@ -47,5 +47,25 @@ export class AppComponent implements OnInit {
     this.broadcastService.broadcastLastChecked(this.dataStore.getCheckData);
     this.dataStore.setCheckData([]);
     this.broadcastService.broadcastSourceToTarget(true);
+    this.broadcastService.broadcastDeleteCheckedAll(false);
+  }
+
+  returnToSource() {
+    const idBox = [];
+    this.dataStore.setAllData(this.dataStore.getCancelData);
+    this.dataStore.getCancelData.forEach(item => {
+      idBox.push(item['id']);
+    });
+    idBox.forEach(i => {
+      this.dataStore.getTargetData.forEach((item, index, arr) => {
+        if (item.id === i) {
+          arr.splice(index, 1);
+        }
+      });
+    });
+    this.broadcastService.broadcastLastCancel(this.dataStore.getCancelData);
+    this.dataStore.setCancelData([]);
+    this.broadcastService.broadcastTargetToSource(true);
+    this.broadcastService.broadcastDeleteCancelAll(false);
   }
 }

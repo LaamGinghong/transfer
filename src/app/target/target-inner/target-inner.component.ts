@@ -1,5 +1,6 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChildren} from '@angular/core';
 import {DataStoreService} from '../../store/data-store.service';
+import {BroadcastService} from '../../service/broadcast.service';
 
 @Component({
   selector: 'app-target-inner',
@@ -7,35 +8,60 @@ import {DataStoreService} from '../../store/data-store.service';
   styleUrls: ['./target-inner.component.css']
 })
 export class TargetInnerComponent implements OnInit {
-  checkNum = 0;
-  checkData = [];
-  @ViewChildren('checkbox') checkbox: ElementRef;
-  @Output() checkOutputNum = new EventEmitter<number>();
+  cancelNum = 0;
+  cancelData = [];
+  @ViewChildren('cancelBox') cancelBox: ElementRef;
+  @Output() cancelOutputNum = new EventEmitter<number>();
 
-  constructor(public dataStore: DataStoreService) {
+  constructor(public dataStore: DataStoreService,
+              private broadcastService: BroadcastService) {
   }
 
   ngOnInit() {
+    this.cancelOutputNum.emit(0);
+    this.broadcastService.targetCancelAll$.subscribe(data => {
+      if (data) {
+        this.cancelNum = this.dataStore.getTargetData.length;
+        this.cancelBox['_results'].forEach(item => {
+          item.nativeElement.checked = true;
+          this.dataStore.getTargetData.forEach(val => {
+            val['targetChecked'] = item.nativeElement.checked;
+          });
+        });
+        this.dataStore.getTargetData.forEach(item => {
+          this.cancelData.push(item);
+        });
+      } else {
+        this.cancelNum = 0;
+        this.cancelBox['_results'].forEach(item => {
+          item.nativeElement.checked = false;
+          this.dataStore.getTargetData.forEach(val => {
+            val['targetChecked'] = item.nativeElement.checked;
+          });
+        });
+        this.cancelData = [];
+      }
+    });
   }
 
-  check(item, checkbox) {
+  cancel(item, checkbox) {
     item['targetChecked'] = checkbox.checked;
-    item['targetChecked'] ? this.checkNum++ : this.checkNum--;
+    item['targetChecked'] ? this.cancelNum++ : this.cancelNum--;
     if (item['targetChecked']) {
-      this.checkData.forEach((val, index) => {
+      this.cancelData.forEach((val, index) => {
         if (val.id === item['id']) {
-          this.checkData.splice(index, 1);
+          this.cancelData.splice(index, 1);
         }
       });
-      this.checkData.push(item);
+      this.cancelData.push(item);
     } else {
-      this.checkData.forEach((val, index) => {
+      this.cancelData.forEach((val, index) => {
         if (val.id === item['id']) {
-          this.checkData.splice(index, 1);
+          this.cancelData.splice(index, 1);
         }
       });
     }
-    this.checkOutputNum.emit(this.checkNum);
-    this.dataStore.setCancelData(this.checkData);
+    this.cancelOutputNum.emit(this.cancelNum);
+    this.dataStore.setCancelData(this.cancelData);
   }
 }

@@ -2,7 +2,7 @@
   <app-source></app-source>
   <div id="button">
     <button [className]="dataStore.getCancelData.length?'checkedButton':'defaultButton'"
-            (click)="selectToTarget()"
+            (click)="returnToSource()"
             [disabled]="!dataStore.getCancelData.length"><
     </button>
     <button [className]="dataStore.getCheckData.length?'checkedButton':'defaultButton'"
